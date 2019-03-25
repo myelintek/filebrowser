@@ -29,6 +29,7 @@ func handleWithStaticData(w http.ResponseWriter, r *http.Request, d *data, box *
 	data := map[string]interface{}{
 		"Name":            d.settings.Branding.Name,
 		"DisableExternal": d.settings.Branding.DisableExternal,
+        "EmbededMode":     d.settings.Branding.EmbededMode,
 		"BaseURL":         d.server.BaseURL,
 		"Version":         version.Version,
 		"StaticURL":       staticURL,

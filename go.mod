@@ -3,11 +3,10 @@ module github.com/filebrowser/filebrowser/v2
 require (
 	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/DataDog/zstd v1.3.4 // indirect
-	github.com/GeertJohan/go.rice v0.0.0-20170420135705-c02ca9a983da
+	github.com/GeertJohan/go.rice v1.0.0
 	github.com/Sereal/Sereal v0.0.0-20180905114147-563b78806e28 // indirect
 	github.com/asdine/storm v2.1.2+incompatible
 	github.com/boltdb/bolt v1.3.1 // indirect
-	github.com/daaku/go.zipexe v0.0.0-20150329023125-a5fe2436ffcb // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/dsnet/compress v0.0.0-20171208185109-cc9eb1d7ad76 // indirect
 	github.com/flynn/go-shlex v0.0.0-20150515145356-3f9db97f8568 // indirect

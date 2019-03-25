@@ -34,6 +34,7 @@ func addConfigFlags(flags *pflag.FlagSet) {
 
 	flags.String("auth.method", string(auth.MethodJSONAuth), "authentication type")
 	flags.String("auth.header", "", "HTTP header for auth.method=proxy")
+    flags.String("auth.url", "http://localhost:10580", "myelindl authentication url")
 
 	flags.String("recaptcha.host", "https://www.google.com", "use another host for ReCAPTCHA. recaptcha.net might be useful in China")
 	flags.String("recaptcha.key", "", "ReCaptcha site key")
@@ -42,6 +43,7 @@ func addConfigFlags(flags *pflag.FlagSet) {
 	flags.String("branding.name", "", "replace 'File Browser' by this name")
 	flags.String("branding.files", "", "path to directory with images and custom styles")
 	flags.Bool("branding.disableExternal", false, "disable external links such as GitHub links")
+	flags.Bool("branding.embededMode", false, "embeded will disable login/logout and settings page")
 }
 
 func getAuthentication(flags *pflag.FlagSet) (settings.AuthMethod, auth.Auther) {
@@ -78,8 +80,16 @@ func getAuthentication(flags *pflag.FlagSet) (settings.AuthMethod, auth.Auther) 
 		auther = jsonAuth
 	}
 
+    if method == auth.MethodMyelindlAuth {
+        authUrl := mustGetString(flags, "auth.url")
+        auther = &auth.MyelindlAuth{AuthUrl: authUrl}
+    }
+
 	if auther == nil {
-		panic(errors.ErrInvalidAuthMethod)
+	    w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', 0)
+        fmt.Fprintf(w, "invalid auth %s\n", method)
+		w.Flush()
+        panic(errors.ErrInvalidAuthMethod)
 	}
 
 	return method, auther
@@ -95,6 +105,7 @@ func printSettings(ser *settings.Server, set *settings.Settings, auther auth.Aut
 	fmt.Fprintf(w, "\tName:\t%s\n", set.Branding.Name)
 	fmt.Fprintf(w, "\tFiles override:\t%s\n", set.Branding.Files)
 	fmt.Fprintf(w, "\tDisable external links:\t%t\n", set.Branding.DisableExternal)
+	fmt.Fprintf(w, "\tEmbeded Mode:\t%t\n", set.Branding.EmbededMode)
 	fmt.Fprintln(w, "\nServer:")
 	fmt.Fprintf(w, "\tLog:\t%s\n", ser.Log)
 	fmt.Fprintf(w, "\tPort:\t%s\n", ser.Port)

@@ -54,6 +54,8 @@ you want to change. Other options will remain unchanged.`,
 				set.Branding.Name = mustGetString(flags, flag.Name)
 			case "branding.disableExternal":
 				set.Branding.DisableExternal = mustGetBool(flags, flag.Name)
+            case "branding.embededMode":
+				set.Branding.EmbededMode = mustGetBool(flags, flag.Name)
 			case "branding.files":
 				set.Branding.Files = mustGetString(flags, flag.Name)
 			}

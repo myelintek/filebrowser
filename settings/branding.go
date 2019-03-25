@@ -4,5 +4,6 @@ package settings
 type Branding struct {
 	Name            string `json:"name"`
 	DisableExternal bool   `json:"disableExternal"`
+	EmbededMode     bool   `json:"embededMode"`
 	Files           string `json:"files"`
 }

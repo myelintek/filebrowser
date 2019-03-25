@@ -37,6 +37,7 @@ override the options.`,
 			Branding: settings.Branding{
 				Name:            mustGetString(flags, "branding.name"),
 				DisableExternal: mustGetBool(flags, "branding.disableExternal"),
+				EmbededMode:     mustGetBool(flags, "branding.embededMode"),
 				Files:           mustGetString(flags, "branding.files"),
 			},
 		}
